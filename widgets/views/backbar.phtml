@@ -1,0 +1,39 @@
+<aside id="left-panel">			
+			<nav>
+				<ul>
+					<?php foreach($menu as $item): ?>
+                            <?php 
+                            $_item_style = "";
+                            
+                            if(View::getViewId() && $item["id"] == View::getViewId())
+                            {
+                                $_item_style = "active";
+                            }
+                            
+                            $dropdown = (isset($item["sub_menu"]) && sizeof($item["sub_menu"]) > 0);
+                            ?>
+
+                            <li class="<?php echo $_item_style;?> fa fa-lg fa-fw">
+                                <a  href="<?php echo $item["enlace"]?>" <?php echo $dropdown ? '' : ""; ?>>
+                                    <i class="<?php echo $item["imagen"]; echo isset($inverse) ? "icon-white" : ""?>"> </i>                                    
+                                    <?php echo $item["titulo"]; echo $dropdown ? ' <b class="caret"></b>' : ""?>
+                                </a>
+                                
+                                <?php if($dropdown): ?>
+                                    <ul>
+                                        <?php foreach($item["sub_menu"] as $item): ?>
+                                            <li class="<?php echo $_item_style;?> fa fa-lg fa-fw">
+                                                <a href="<?php echo $item["enlace"]?>">                                                    
+                                                    <?php echo $item["titulo"]; ?>
+                                                </a>                                               
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+
+			    </ul>
+
+			</nav>
+</aside>	    
